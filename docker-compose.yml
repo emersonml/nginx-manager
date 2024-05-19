@@ -1,6 +1,7 @@
 services:
   app:
     image: jc21/nginx-proxy-manager:latest
+    hostname: nginx-manager
     restart: always
     ports:
       - "80:80"       # Porta para HTTP
@@ -14,10 +15,11 @@ services:
       DB_MYSQL_NAME: "npm"
     volumes:
       - ./letsencrypt:/etc/letsencrypt
-      - /volume/nginx-manager_data/app:/data
+      - /volumes/nginx-manager_data/app:/data
     networks:
-      default:
-        ipv4_address: 10.0.2.2
+      - default
+      - portainer_default
+    #     ipv4_address: 10.0.2.2
     depends_on:
       - db
 
@@ -30,11 +32,21 @@ services:
       MYSQL_USER: "npm"
       MYSQL_PASSWORD: "npm"
     volumes:
-      - /volume/nginx-manager_data/mysql:/var/lib/mysql
+      - /volumes/nginx-manager_data/mysql:/var/lib/mysql
+    networks:
+      - default
+
+
 
 networks:
-  default:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.0.2.0/24
+  portainer_default:
+    external: true
+
+# networks:
+#   default:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 10.0.2.0/24
+
+
