@@ -1,5 +1,3 @@
-
-
 services:
   app:
     image: jc21/nginx-proxy-manager:latest
@@ -15,8 +13,11 @@ services:
       DB_MYSQL_PASSWORD: "npm"
       DB_MYSQL_NAME: "npm"
     volumes:
-      - /volume/nginx-manager_data/app:/data
       - ./letsencrypt:/etc/letsencrypt
+      - /volume/nginx-manager_data/app:/data
+    networks:
+      default:
+        ipv4_address: 10.0.2.2
     depends_on:
       - db
 
@@ -34,3 +35,6 @@ services:
 networks:
   default:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.2.0/24
