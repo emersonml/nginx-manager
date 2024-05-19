@@ -14,8 +14,8 @@ services:
       DB_MYSQL_PASSWORD: "npm"
       DB_MYSQL_NAME: "npm"
     volumes:
-      - ./letsencrypt:/etc/letsencrypt
-      - /volumes/nginx-manager_data/app:/data
+      - /volumes/nginx-manager/app/letsencrypt:/etc/letsencrypt
+      - /volumes/nginx-manager/app/data/app:/data
     networks:
       - default
       - portainer_default
@@ -32,7 +32,7 @@ services:
       MYSQL_USER: "npm"
       MYSQL_PASSWORD: "npm"
     volumes:
-      - /volumes/nginx-manager_data/mysql:/var/lib/mysql
+      - /volumes/nginx-manager/mysql:/var/lib/mysql
     networks:
       - default
 
