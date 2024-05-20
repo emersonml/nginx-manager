@@ -14,12 +14,11 @@ services:
       DB_MYSQL_PASSWORD: "npm"
       DB_MYSQL_NAME: "npm"
     volumes:
-      - /volumes/nginx-manager/app/letsencrypt:/etc/letsencrypt
-      - /volumes/nginx-manager/app/data/app:/data
+      - /docker/nginx-manager/app/letsencrypt:/etc/letsencrypt
+      - /data/nginx-manager/app:/data
     networks:
       - default
       - portainer_default
-    #     ipv4_address: 10.0.2.2
     depends_on:
       - db
 
@@ -32,7 +31,7 @@ services:
       MYSQL_USER: "npm"
       MYSQL_PASSWORD: "npm"
     volumes:
-      - /volumes/nginx-manager/mysql:/var/lib/mysql
+      - /data/nginx-manager/db:/var/lib/mysql
     networks:
       - default
 
@@ -42,11 +41,5 @@ networks:
   portainer_default:
     external: true
 
-# networks:
-#   default:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 10.0.2.0/24
 
 
