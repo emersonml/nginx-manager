@@ -1,7 +1,8 @@
 version: '3'
 services:
   app:
-    image: 'jc21/nginx-proxy-manager:latest'
+    build: .
+    image: 'esoft/nginx-proxy-manager:latest'
     hostname: nginx-manager
     restart: unless-stopped
     ports:
@@ -36,7 +37,6 @@ services:
       - /srv/volumes/nginx-manager/db_data/_data:/var/lib/mysql
     networks:
       - default
-
 
 networks:
   portainer_default:
