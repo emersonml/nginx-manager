@@ -16,7 +16,8 @@ services:
       DB_MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
       DB_MYSQL_NAME: ${DB_MYSQL_NAME}
     volumes:
-      - "/etc/localtime:/etc/localtime:ro"  # DATE
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /srv/volumes/npm/app_etc_letsencrypt/_data:/etc/letsencrypt
       - /srv/volumes/npm/app/_data:/data
     devices:
